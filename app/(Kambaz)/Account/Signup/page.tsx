@@ -3,7 +3,7 @@ export default function Signup() {
   return (
     <div id="wd-signup-screen">
       <h3>Sign up</h3>
-      <input placeholder="username" className="wd-username" defaultValue="carolyncs4550" /> 
+      <input placeholder="username" className="wd-username" defaultValue="carolyn_hoa_cs4550" /> 
       <br/>
       <input placeholder="password" type="password" className="wd-password" /><br/>
       <input placeholder="verify password"
