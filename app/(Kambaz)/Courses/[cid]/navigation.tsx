@@ -8,10 +8,10 @@ export default function CourseNavigation() {
   const navLinks = [
     { href: "/Courses/1234/Home", label: "Home" },
     { href: "/Courses/1234/Modules", label: "Modules" },
-    { href: "/Courses/1234/People/Table", label: "Piazza" },
-    { href: "/Courses/1234/People/Table", label: "Zoom" },
+    { href: "https://piazza.com/class/mf1li76n4is6m", label: "Piazza" },
+    { href: "https://www.zoom.com/", label: "Zoom" },
     { href: "/Courses/1234/Assignments", label: "Assignments" },
-    { href: "/Courses/1234/People/Table", label: "Quizzes" },
+    { href: "https://northeastern.instructure.com/courses/225902/quizzes", label: "Quizzes" },
     { href: "/Courses/1234/People/Table", label: "People" },
   ];
 

@@ -23,8 +23,8 @@ export default function KambazNavigation() {
     { href: "/Account", icon: FaRegCircleUser, label: "Account" },
     { href: "/Dashboard", icon: AiOutlineDashboard, label: "Dashboard" },
     { href: "/Courses/default/Home", icon: LiaBookSolid, label: "Courses" },
-    { href: "/Labs", icon: IoCalendarOutline, label: "Calendar" },
-    { href: "/Labs", icon: FaInbox, label: "Inbox" },
+    { href: "https://northeastern.instructure.com/calendar#view_name=month&view_start=2025-10-03", icon: IoCalendarOutline, label: "Calendar" },
+    { href: "https://northeastern.instructure.com/conversations#filter=type=inbox", icon: FaInbox, label: "Inbox" },
     { href: "/Labs", icon: LiaCogSolid, label: "Labs" },
   ];
 
