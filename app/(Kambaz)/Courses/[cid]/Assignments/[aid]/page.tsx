@@ -1,9 +1,19 @@
 "use client";
-
 import React from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
+import { assignments } from "../../../../Database";
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams<{ cid: string; aid: string }>();
+
+  const assignment = assignments.find((a) => a._id === aid);
+
+  if (!assignment) {
+    return <div className="p-4 text-danger">Assignment not found.</div>;
+  }
+
   return (
     <div id="wd-assignments-editor" className="p-4">
       <Form>
@@ -11,23 +21,16 @@ export default function AssignmentEditor() {
           <Form.Label>
             <b>Assignment Name</b>
           </Form.Label>
-          <Form.Control type="text" defaultValue="A1 - ENV + HTML" />
+          <Form.Control type="text" defaultValue={assignment.title} />
         </Form.Group>
 
         <Form.Group className="mb-4">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={8} 
-          defaultValue={`The assignment is available online
-
-            Submit a link to the landing page of your Web application running on Netlify.
-            
-            The landing page should include the following:
-            - Your full name and section
-            - Links to each of the lab assignments
-            - Link to the Kanbas application
-            - Links to all relevant source code repositories
-            
-            The Kanbas application should include a link to navigate back to the landing page.`}/>
+          <Form.Control
+            as="textarea"
+            rows={6}
+            defaultValue={`Description for "${assignment.title}".`}
+          />
         </Form.Group>
 
         <Form.Group as={Row} className="align-items-center mb-4">
@@ -102,20 +105,20 @@ export default function AssignmentEditor() {
 
               <Form.Group className="mb-3">
                 <Form.Label>Due</Form.Label>
-                <Form.Control type="date" defaultValue="2024-05-13" />
+                <Form.Control type="date" defaultValue="2024-12-01" />
               </Form.Group>
 
               <Row>
                 <Col>
                   <Form.Group className="mb-3">
                     <Form.Label>Available from</Form.Label>
-                    <Form.Control type="date" defaultValue="2024-05-06" />
+                    <Form.Control type="date" defaultValue="2024-11-20" />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group className="mb-3">
                     <Form.Label>Until</Form.Label>
-                    <Form.Control type="date" defaultValue="2024-05-20" />
+                    <Form.Control type="date" defaultValue="2024-12-15" />
                   </Form.Group>
                 </Col>
               </Row>
@@ -126,12 +129,14 @@ export default function AssignmentEditor() {
         <hr />
 
         <div className="text-end">
-          <Button variant="secondary" type="reset" className="me-2">
-            Cancel
-          </Button>
-          <Button variant="danger" type="submit">
-            Save
-          </Button>
+          <Link href={`/Courses/${cid}/Assignments`}>
+            <Button variant="secondary" className="me-2">
+              Cancel
+            </Button>
+          </Link>
+          <Link href={`/Courses/${cid}/Assignments`}>
+            <Button variant="danger">Save</Button>
+          </Link>
         </div>
       </Form>
     </div>
