@@ -11,13 +11,19 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import GreenCheckmark from "../Modules/GreenCheckmark";
 import * as db from "../../../Database";
 
+type Assignment = {
+  _id: string;
+  title: string;
+  course: string;
+};
+
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments.filter((a: any) => a.course === cid);
+  const assignments = db.assignments.filter(
+    (a: Assignment) => a.course === cid)
 
   return (
     <div id="wd-assignments">
-      {/* Top search bar + add buttons */}
       <div className="d-flex justify-content-between mb-3">
         <InputGroup className="w-25">
           <InputGroup.Text className="bg-white border-end-0">
@@ -40,9 +46,7 @@ export default function Assignments() {
         </div>
       </div>
 
-      {/* Assignment list */}
       <ListGroup className="rounded-0" id="wd-assignments-list">
-        {/* Header row */}
         <ListGroupItem
           className="p-3 fs-5 d-flex justify-content-between align-items-center bg-light"
         >
@@ -59,9 +63,8 @@ export default function Assignments() {
           </div>
         </ListGroupItem>
 
-        {/* Data-driven assignment items */}
         <ListGroup className="wd-lessons rounded-0">
-          {assignments.map((a: any) => (
+          {assignments.map((a: Assignment) => (
             <ListGroupItem
               key={a._id}
               className="p-3 d-flex justify-content-between align-items-center"
