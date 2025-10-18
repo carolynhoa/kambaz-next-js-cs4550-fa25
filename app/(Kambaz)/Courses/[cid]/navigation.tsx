@@ -19,6 +19,7 @@ export default function CourseNavigation({ cid }: { cid: string }) {
           if (label === "Piazza") href = "https://piazza.com/class/mf1li76n4is6m";
           if (label === "Zoom") href = "https://www.zoom.com/";
           if (label === "Quizzes") href = "https://northeastern.instructure.com/courses/225902/quizzes";
+          if (label === "Grades") href = "https://northeastern.instructure.com/courses/225902/grades";
         }
 
         const isActive = !isExternal && pathname.startsWith(href);
