@@ -14,7 +14,7 @@ export default function CourseNavigation({ cid }: { cid: string }) {
         if (label === "People") href = `/Courses/${cid}/People/Table`;
         let isExternal = false;
 
-        if (["Piazza", "Zoom", "Quizzes"].includes(label)) {
+        if (["Piazza", "Zoom", "Quizzes", "Grades"].includes(label)) {
           isExternal = true;
           if (label === "Piazza") href = "https://piazza.com/class/mf1li76n4is6m";
           if (label === "Zoom") href = "https://www.zoom.com/";
