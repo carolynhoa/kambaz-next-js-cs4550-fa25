@@ -1,18 +1,61 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
-import { assignments } from "../../../../Database";
+import { useSelector, useDispatch } from "react-redux";
+import { addAssignment, updateAssignment } from "../reducer";
+
+interface Assignment {
+  _id?: string;
+  title: string;
+  description: string;
+  points: number;
+  dueDate: string;
+  availableFrom: string;
+  availableUntil: string;
+  course?: string;
+}
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string; aid: string }>();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: { assignmentsReducer: { assignments: Assignment[] } }) => state.assignmentsReducer);
 
-  const assignment = assignments.find((a) => a._id === aid);
+  const isNewAssignment = aid === "new";
+  const existingAssignment = assignments.find((a: Assignment) => a._id === aid);
 
-  if (!assignment) {
-    return <div className="p-4 text-danger">Assignment not found.</div>;
-  }
+  const [assignment, setAssignment] = useState({
+    title: "",
+    description: "",
+    points: 100,
+    dueDate: "",
+    availableFrom: "",
+    availableUntil: "",
+  });
+
+  useEffect(() => {
+    if (!isNewAssignment && existingAssignment) {
+      setAssignment({
+        title: existingAssignment.title || "",
+        description: existingAssignment.description || "",
+        points: existingAssignment.points || 100,
+        dueDate: existingAssignment.dueDate || "",
+        availableFrom: existingAssignment.availableFrom || "",
+        availableUntil: existingAssignment.availableUntil || "",
+      });
+    }
+  }, [isNewAssignment, existingAssignment]);
+
+  const handleSave = () => {
+    if (isNewAssignment) {
+      dispatch(addAssignment({ ...assignment, course: cid }));
+    } else {
+      dispatch(updateAssignment({ ...assignment, _id: aid, course: cid }));
+    }
+    router.push(`/Courses/${cid}/Assignments`);
+  };
 
   return (
     <div id="wd-assignments-editor" className="p-4">
@@ -21,7 +64,11 @@ export default function AssignmentEditor() {
           <Form.Label>
             <b>Assignment Name</b>
           </Form.Label>
-          <Form.Control type="text" defaultValue={assignment.title} />
+          <Form.Control
+            type="text"
+            value={assignment.title}
+            onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
+          />
         </Form.Group>
 
         <Form.Group className="mb-4">
@@ -29,7 +76,8 @@ export default function AssignmentEditor() {
           <Form.Control
             as="textarea"
             rows={6}
-            defaultValue={`Description for "${assignment.title}".`}
+            value={assignment.description}
+            onChange={(e) => setAssignment({ ...assignment, description: e.target.value })}
           />
         </Form.Group>
 
@@ -38,7 +86,11 @@ export default function AssignmentEditor() {
             Points
           </Form.Label>
           <Col sm={9}>
-            <Form.Control type="number" defaultValue={100} />
+            <Form.Control
+              type="number"
+              value={assignment.points}
+              onChange={(e) => setAssignment({ ...assignment, points: parseInt(e.target.value) })}
+            />
           </Col>
         </Form.Group>
 
@@ -105,20 +157,32 @@ export default function AssignmentEditor() {
 
               <Form.Group className="mb-3">
                 <Form.Label>Due</Form.Label>
-                <Form.Control type="date" defaultValue="2024-12-01" />
+                <Form.Control
+                  type="date"
+                  value={assignment.dueDate}
+                  onChange={(e) => setAssignment({ ...assignment, dueDate: e.target.value })}
+                />
               </Form.Group>
 
               <Row>
                 <Col>
                   <Form.Group className="mb-3">
                     <Form.Label>Available from</Form.Label>
-                    <Form.Control type="date" defaultValue="2024-11-20" />
+                    <Form.Control
+                      type="date"
+                      value={assignment.availableFrom}
+                      onChange={(e) => setAssignment({ ...assignment, availableFrom: e.target.value })}
+                    />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group className="mb-3">
                     <Form.Label>Until</Form.Label>
-                    <Form.Control type="date" defaultValue="2024-12-15" />
+                    <Form.Control
+                      type="date"
+                      value={assignment.availableUntil}
+                      onChange={(e) => setAssignment({ ...assignment, availableUntil: e.target.value })}
+                    />
                   </Form.Group>
                 </Col>
               </Row>
@@ -134,9 +198,9 @@ export default function AssignmentEditor() {
               Cancel
             </Button>
           </Link>
-          <Link href={`/Courses/${cid}/Assignments`}>
-            <Button variant="danger">Save</Button>
-          </Link>
+          <Button variant="danger" onClick={handleSave}>
+            Save
+          </Button>
         </div>
       </Form>
     </div>
