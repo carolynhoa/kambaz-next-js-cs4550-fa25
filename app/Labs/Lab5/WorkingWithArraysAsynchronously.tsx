@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 import { ListGroup, ListGroupItem, FormControl } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
