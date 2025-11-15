@@ -29,6 +29,8 @@ export default function TOC() {
      </NavItem>
      <NavItem>
        <NavLink href="https://github.com/carolynhoa">My GitHub</NavLink>
+       <NavLink href="https://github.com/carolynhoa/-kambaz-node-server-app.git">Node Server Git Repo</NavLink>
+       <NavLink href="https://kambaz-node-carolyn-fa25.onrender.com">My Render Link</NavLink>
      </NavItem>
    </Nav>
 );}
