@@ -19,6 +19,9 @@ export default function Labs() {
        <li>
          <Link href="/Labs/Lab4" id="wd-lab3-link">
            Lab 4: Redux </Link> </li> 
+           <li>
+         <Link href="/Labs/Lab5" id="wd-lab3-link">
+           Lab 5: Node.js </Link> </li> 
            <li>     
        <Link href="/" id="wd-lab3-link">
          Kambaz </Link> </li>

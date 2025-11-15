@@ -1,5 +1,5 @@
 "use client";
-
+import * as client from "./client";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ListGroup, ListGroupItem, Button, InputGroup, Modal } from "react-bootstrap";
@@ -12,7 +12,9 @@ import GreenCheckmark from "../Modules/GreenCheckmark";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAssignment } from "./reducer";
 import { useState } from "react";
-
+import { setAssignments } from "./reducer";
+import { useEffect } from "react";
+import { RootState } from "../../../store";  
 type Assignment = {
   _id: string;
   title: string;
@@ -26,8 +28,17 @@ type Assignment = {
 
 export default function Assignments() {
   const { cid } = useParams();
-  const { assignments } = useSelector((state: { assignmentsReducer: { assignments: Assignment[] } }) => state.assignmentsReducer);
+  const { assignments } = useSelector((state: RootState) => state.assignmentsReducer);
   const dispatch = useDispatch();
+
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
   
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(null);

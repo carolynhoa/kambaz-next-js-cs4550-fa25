@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, updateAssignment } from "../reducer";
+import * as client from "../client";  // ← Import your client file
 
 interface Assignment {
   _id?: string;
@@ -20,11 +19,8 @@ interface Assignment {
 export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string; aid: string }>();
   const router = useRouter();
-  const dispatch = useDispatch();
-  const { assignments } = useSelector((state: { assignmentsReducer: { assignments: Assignment[] } }) => state.assignmentsReducer);
 
   const isNewAssignment = aid === "new";
-  const existingAssignment = assignments.find((a: Assignment) => a._id === aid);
 
   const [assignment, setAssignment] = useState({
     title: "",
@@ -36,23 +32,30 @@ export default function AssignmentEditor() {
   });
 
   useEffect(() => {
-    if (!isNewAssignment && existingAssignment) {
-      setAssignment({
-        title: existingAssignment.title || "",
-        description: existingAssignment.description || "",
-        points: existingAssignment.points || 100,
-        dueDate: existingAssignment.dueDate || "",
-        availableFrom: existingAssignment.availableFrom || "",
-        availableUntil: existingAssignment.availableUntil || "",
-      });
-    }
-  }, [isNewAssignment, existingAssignment]);
+    const fetchAssignment = async () => {
+      if (!isNewAssignment) {
+        const assignments = await client.findAssignmentsForCourse(cid);
+        const existingAssignment = assignments.find((a: any) => a._id === aid);
+        if (existingAssignment) {
+          setAssignment({
+            title: existingAssignment.title || "",
+            description: existingAssignment.description || "",
+            points: existingAssignment.points || 100,
+            dueDate: existingAssignment.dueDate || "",
+            availableFrom: existingAssignment.availableFrom || "",
+            availableUntil: existingAssignment.availableUntil || "",
+          });
+        }
+      }
+    };
+    fetchAssignment();
+  }, [aid, cid, isNewAssignment]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (isNewAssignment) {
-      dispatch(addAssignment({ ...assignment, course: cid }));
+      await client.createAssignment(cid, assignment);
     } else {
-      dispatch(updateAssignment({ ...assignment, _id: aid, course: cid }));
+      await client.updateAssignment({ ...assignment, _id: aid });
     }
     router.push(`/Courses/${cid}/Assignments`);
   };

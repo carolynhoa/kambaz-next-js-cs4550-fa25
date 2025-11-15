@@ -21,6 +21,10 @@ const assignmentsSlice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
+    setAssignments: (state, action) => {
+      state.assignments = action.payload;
+    },
+
     addAssignment: (state, { payload: assignment }) => {
       const newAssignment: Assignment = {
         _id: uuidv4(),
@@ -34,11 +38,13 @@ const assignmentsSlice = createSlice({
       };
       state.assignments = [...state.assignments, newAssignment];
     },
+
     deleteAssignment: (state, { payload: assignmentId }) => {
       state.assignments = state.assignments.filter(
         (a: Assignment) => a._id !== assignmentId
       );
     },
+
     updateAssignment: (state, { payload: assignment }) => {
       state.assignments = state.assignments.map((a: Assignment) =>
         a._id === assignment._id ? assignment : a
@@ -47,6 +53,11 @@ const assignmentsSlice = createSlice({
   },
 });
 
-export const { addAssignment, deleteAssignment, updateAssignment } =
-  assignmentsSlice.actions;
+export const {
+  setAssignments,
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+} = assignmentsSlice.actions;
+
 export default assignmentsSlice.reducer;

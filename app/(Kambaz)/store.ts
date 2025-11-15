@@ -9,4 +9,5 @@ const store = configureStore({
  reducer: { coursesReducer, modulesReducer, accountReducer, assignmentsReducer, enrollmentsReducer,
  },
 });
+export type RootState = ReturnType<typeof store.getState>;
 export default store;
