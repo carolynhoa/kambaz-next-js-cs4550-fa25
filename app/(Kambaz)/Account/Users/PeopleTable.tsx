@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
+import PeopleDetails from "../../Courses/[cid]/People/Details";
 
 type User = {
   _id: string;
@@ -15,21 +16,25 @@ type User = {
 };
 
 type PeopleTableProps = {
-  users?: User[];                 
-  fetchUsers: () => Promise<User[]>; 
+  users?: User[];
+  fetchUsers: () => Promise<User[]>;
 };
 
 export default function PeopleTable({ users = [], fetchUsers }: PeopleTableProps) {
-  const [userList, setUserList] = useState<User[]>(users);
+  const [showDetails, setShowDetails] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!users.length && fetchUsers) {
-      fetchUsers().then(fetchedUsers => setUserList(fetchedUsers));
-    }
-  }, [users, fetchUsers]);
+  const handleCloseDetails = () => {
+    setShowDetails(false);
+    fetchUsers(); 
+  };
 
   return (
     <div id="wd-people-table">
+      {showDetails && selectedUserId && (
+        <PeopleDetails uid={selectedUserId} onClose={handleCloseDetails} />
+      )}
+
       <Table striped>
         <thead>
           <tr>
@@ -42,12 +47,21 @@ export default function PeopleTable({ users = [], fetchUsers }: PeopleTableProps
           </tr>
         </thead>
         <tbody>
-          {userList.map((user) => (
+          {users.map((user) => (
             <tr key={user._id}>
               <td className="wd-full-name text-nowrap">
-                <FaUserCircle className="me-2 fs-1 text-secondary" />
-                <span className="wd-first-name">{user.firstName}</span>{" "}
-                <span className="wd-last-name">{user.lastName}</span>
+                <span
+                  className="text-decoration-none"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSelectedUserId(user._id);
+                    setShowDetails(true);
+                  }}
+                >
+                  <FaUserCircle className="me-2 fs-1 text-secondary" />
+                  <span className="wd-first-name">{user.firstName}</span>{" "}
+                  <span className="wd-last-name">{user.lastName}</span>
+                </span>
               </td>
               <td className="wd-login-id">{user.loginId}</td>
               <td className="wd-section">{user.section}</td>

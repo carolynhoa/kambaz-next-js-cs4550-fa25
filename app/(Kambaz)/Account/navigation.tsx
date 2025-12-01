@@ -4,8 +4,9 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export default function AccountNavigation() {
-  const { currentUser } = useSelector((state: { accountReducer: { currentUser: unknown } }) => state.accountReducer);
-  const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
+  const { currentUser } = useSelector(
+    (state: { accountReducer: { currentUser: any } }) => state.accountReducer
+  );
 
   const pathname = usePathname();
 
@@ -14,6 +15,13 @@ export default function AccountNavigation() {
     { href: "/Account/Signup", label: "Signup" },
     { href: "/Account/Profile", label: "Profile" },
   ];
+
+  if (currentUser && currentUser.role === "ADMIN") {
+    navLinks.push({
+      href: "/Account/Users",
+      label: "Users",
+    });
+  }
 
   return (
     <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0">

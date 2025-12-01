@@ -69,7 +69,12 @@ export const unenrollFromCourse = async (userId: string, courseId: string) => {
   );
   return response.data;
 };
-  
+ 
+export const updateUser = async (user: any) => {
+  const response = await axiosWithCredentials.put(`${USERS_API}/${user._id}`, user);
+  return response.data;
+};
+
 
   
   
