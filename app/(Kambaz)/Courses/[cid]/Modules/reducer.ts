@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { modules } from "../../../Database";
 import { v4 as uuidv4 } from "uuid";
 
 interface Lesson {
@@ -19,15 +18,16 @@ interface Module {
 }
 
 const initialState = {
-  modules: modules,
+  modules: [] as Module[],  
 };
 
 const modulesSlice = createSlice({
   name: "modules",
   initialState,
   reducers: {
-    setModules: (state, action) => {
-      state.modules = action.payload;
+    setModules: (state, { payload: modules }) => {
+      console.log("REDUCER: Setting modules to:", modules);  
+      state.modules = modules;
     },
 
     addModule: (state, { payload: module }) => {
@@ -40,15 +40,19 @@ const modulesSlice = createSlice({
       };
       state.modules = [...state.modules, newModule] as typeof state.modules;
     },
+    
     deleteModule: (state, { payload: moduleId }) => {
       state.modules = state.modules.filter(
-        (m: Module) => m._id !== moduleId) as typeof state.modules;
+        (m: Module) => m._id !== moduleId
+      ) as typeof state.modules;
     },
+    
     updateModule: (state, { payload: module }) => {
       state.modules = state.modules.map((m: Module) =>
         m._id === module._id ? module : m
       ) as typeof state.modules;
     },
+    
     editModule: (state, { payload: moduleId }) => {
       state.modules = state.modules.map((m: Module) =>
         m._id === moduleId ? { ...m, editing: true } : m
@@ -57,6 +61,6 @@ const modulesSlice = createSlice({
   },
 });
 
-export const { addModule, deleteModule, updateModule, editModule, setModules} =
+export const { addModule, deleteModule, updateModule, editModule, setModules } =
   modulesSlice.actions;
 export default modulesSlice.reducer;

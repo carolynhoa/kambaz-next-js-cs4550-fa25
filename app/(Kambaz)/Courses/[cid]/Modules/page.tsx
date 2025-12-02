@@ -38,14 +38,27 @@ export default function Modules() {
   const dispatch = useDispatch();
 
   const onUpdateModule = async (mod: Module) => {
-    await client.updateModule(mod);
+    const courseId = Array.isArray(cid) ? cid[0] : cid;
+    if (!courseId) return; 
+  
+    await client.updateModule(courseId, mod); 
     const newModules = modules.map((m: Module) => m._id === mod._id ? mod : m );
     dispatch(setModules(newModules));
   };
 
   const fetchModules = async () => {
-    const mods = await client.findModulesForCourse(cid as string);
-    dispatch(setModules(mods));
+    console.log("COMPONENT: cid =", cid);
+    console.log("COMPONENT: typeof cid =", typeof cid);
+    
+    try {
+      const mods = await client.findModulesForCourse(cid as string);
+      console.log("COMPONENT: Received mods =", mods);
+      console.log("COMPONENT: mods is array?", Array.isArray(mods));
+      
+      dispatch(setModules(mods));
+    } catch (error) {
+      console.error("COMPONENT ERROR:", error);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +74,9 @@ export default function Modules() {
   };
 
   const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(moduleId);
+    const courseId = Array.isArray(cid) ? cid[0] : cid;
+    if (!courseId) return; 
+    await client.deleteModule(courseId, moduleId);
     dispatch(setModules(modules.filter((m: Module) => m._id !== moduleId)));
   };
 
