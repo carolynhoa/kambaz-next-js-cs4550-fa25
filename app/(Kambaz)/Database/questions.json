@@ -1,0 +1,113 @@
+[
+    {
+      "_id": "QS101",
+      "quiz": "Q101",
+      "type": "multiple-choice",
+      "title": "HTML Basics",
+      "points": 3,
+      "question": "What does HTML stand for?",
+      "choices": [
+        { "text": "Hyper Text Markup Language", "isCorrect": true },
+        { "text": "High Tech Modern Language", "isCorrect": false },
+        { "text": "Home Tool Markup Language", "isCorrect": false },
+        { "text": "Hyperlinks and Text Markup Language", "isCorrect": false }
+      ]
+    },
+    {
+      "_id": "QS102",
+      "quiz": "Q101",
+      "type": "true-false",
+      "title": "HTML Tags",
+      "points": 2,
+      "question": "HTML tags are case-sensitive",
+      "correctAnswer": false
+    },
+    {
+      "_id": "QS103",
+      "quiz": "Q101",
+      "type": "fill-in-blank",
+      "title": "HTML Elements",
+      "points": 5,
+      "question": "The _____ tag is used to create a hyperlink in HTML",
+      "possibleAnswers": ["a", "anchor", "<a>", "a tag"]
+    },
+    {
+      "_id": "QS201",
+      "quiz": "Q102",
+      "type": "multiple-choice",
+      "title": "CSS Selectors",
+      "points": 5,
+      "question": "Which CSS selector has the highest specificity?",
+      "choices": [
+        { "text": "ID selector", "isCorrect": true },
+        { "text": "Class selector", "isCorrect": false },
+        { "text": "Element selector", "isCorrect": false },
+        { "text": "Universal selector", "isCorrect": false }
+      ]
+    },
+    {
+      "_id": "QS202",
+      "quiz": "Q102",
+      "type": "true-false",
+      "title": "CSS Box Model",
+      "points": 3,
+      "question": "Padding is inside the border in the CSS box model",
+      "correctAnswer": true
+    },
+    {
+      "_id": "QS203",
+      "quiz": "Q102",
+      "type": "fill-in-blank",
+      "title": "CSS Properties",
+      "points": 7,
+      "question": "The CSS property _____ is used to change text color",
+      "possibleAnswers": ["color", "colour"]
+    },
+    {
+      "_id": "QS301",
+      "quiz": "Q103",
+      "type": "multiple-choice",
+      "title": "JavaScript Variables",
+      "points": 4,
+      "question": "Which keyword is used to declare a block-scoped variable?",
+      "choices": [
+        { "text": "let", "isCorrect": true },
+        { "text": "var", "isCorrect": false },
+        { "text": "const", "isCorrect": false },
+        { "text": "function", "isCorrect": false }
+      ]
+    },
+    {
+      "_id": "QS302",
+      "quiz": "Q103",
+      "type": "true-false",
+      "title": "JavaScript Arrays",
+      "points": 4,
+      "question": "JavaScript arrays can hold multiple data types",
+      "correctAnswer": true
+    },
+    {
+      "_id": "QS303",
+      "quiz": "Q103",
+      "type": "multiple-choice",
+      "title": "Arrow Functions",
+      "points": 6,
+      "question": "What is the correct syntax for an arrow function?",
+      "choices": [
+        { "text": "() => {}", "isCorrect": true },
+        { "text": "function() => {}", "isCorrect": false },
+        { "text": "=> () {}", "isCorrect": false },
+        { "text": "() -> {}", "isCorrect": false }
+      ]
+    },
+    {
+      "_id": "QS304",
+      "quiz": "Q103",
+      "type": "fill-in-blank",
+      "title": "Array Methods",
+      "points": 6,
+      "question": "The _____ method is used to iterate over array elements",
+      "possibleAnswers": ["map", "forEach", "for", "loop"]
+    }
+  ]
+ 
