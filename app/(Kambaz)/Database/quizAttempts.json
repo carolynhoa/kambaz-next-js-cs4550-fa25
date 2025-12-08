@@ -1,0 +1,103 @@
+[
+    {
+      "_id": "QA101-234-1",
+      "quiz": "Q101",
+      "student": "234",
+      "submittedAt": "2024-05-10T15:30:00.000Z",
+      "answers": [
+        { "questionId": "QS101", "answer": "Hyper Text Markup Language" },
+        { "questionId": "QS102", "answer": false },
+        { "questionId": "QS103", "answer": "a" }
+      ],
+      "score": 10
+    },
+    {
+      "_id": "QA101-456-1",
+      "quiz": "Q101",
+      "student": "456",
+      "submittedAt": "2024-05-11T12:00:00.000Z",
+      "answers": [
+        { "questionId": "QS101", "answer": "Home Tool Markup Language" },
+        { "questionId": "QS102", "answer": false },
+        { "questionId": "QS103", "answer": "<a>" }
+      ],
+      "score": 7
+    },
+    {
+      "_id": "QA102-234-1",
+      "quiz": "Q102",
+      "student": "234",
+      "submittedAt": "2024-05-15T09:45:00.000Z",
+      "answers": [
+        { "questionId": "QS201", "answer": "ID selector" },
+        { "questionId": "QS202", "answer": true },
+        { "questionId": "QS203", "answer": "color" }
+      ],
+      "score": 15
+    },
+    {
+      "_id": "QA102-567-1",
+      "quiz": "Q102",
+      "student": "567",
+      "submittedAt": "2024-05-16T18:20:00.000Z",
+      "answers": [
+        { "questionId": "QS201", "answer": "Class selector" },
+        { "questionId": "QS202", "answer": true },
+        { "questionId": "QS203", "answer": "colour" }
+      ],
+      "score": 10
+    },
+    {
+      "_id": "QA103-234-1",
+      "quiz": "Q103",
+      "student": "234",
+      "submittedAt": "2024-05-20T11:00:00.000Z",
+      "answers": [
+        { "questionId": "QS301", "answer": "let" },
+        { "questionId": "QS302", "answer": true },
+        { "questionId": "QS303", "answer": "() => {}" },
+        { "questionId": "QS304", "answer": "map" }
+      ],
+      "score": 20
+    },
+    {
+      "_id": "QA103-890-1",
+      "quiz": "Q103",
+      "student": "890",
+      "submittedAt": "2024-05-21T14:10:00.000Z",
+      "answers": [
+        { "questionId": "QS301", "answer": "var" },
+        { "questionId": "QS302", "answer": true },
+        { "questionId": "QS303", "answer": "() => {}" },
+        { "questionId": "QS304", "answer": "loop" }
+      ],
+      "score": 14
+    },
+    {
+      "_id": "QA201-567-1",
+      "quiz": "Q201",
+      "student": "567",
+      "submittedAt": "2024-06-10T10:15:00.000Z",
+      "answers": [],
+      "score": 0
+    },
+    {
+      "_id": "QA202-456-1",
+      "quiz": "Q202",
+      "student": "456",
+      "submittedAt": "2024-05-10T10:00:00.000Z",
+      "answers": [
+        { "questionId": "QS201", "answer": "ID selector" }
+      ],
+      "score": 5
+    },
+    {
+      "_id": "QA301-890-1",
+      "quiz": "Q301",
+      "student": "890",
+      "submittedAt": "2024-06-20T15:00:00.000Z",
+      "answers": [],
+      "score": 0
+    }
+  ]
+  
